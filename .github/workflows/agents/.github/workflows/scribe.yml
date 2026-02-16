@@ -1,0 +1,18 @@
+name: Scribe Agent 
+on: 
+ schedule: 
+ - cron: '0 14 * * *' 
+ workflow_dispatch: 
+jobs: 
+ scribe: 
+ runs-on: ubuntu-latest 
+ steps: 
+ - uses: actions/checkout@v4 
+ - uses: actions/setup-node@v4 
+ with: { node-version: '20' } 
+ - run: node agents/scribe.js 
+ env: 
+ DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }} 
+ SUPABASE_URL: ${{ secrets.SUPABASE_URL }} 
+ SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }} 
+ RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }} 
